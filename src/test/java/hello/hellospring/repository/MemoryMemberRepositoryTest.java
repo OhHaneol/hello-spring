@@ -15,6 +15,10 @@ class MemoryMemberRepositoryTest {
 
     MemoryMemberRepository repository = new MemoryMemberRepository();   // MemoryMemberRepository 만 테스트 하니까 인터페이스 말고 해당으로 바꿔줌
 
+    @AfterEach
+    public void afterEach() {
+        repository.clearStore();
+    }
 
     @Test
     public void save() {

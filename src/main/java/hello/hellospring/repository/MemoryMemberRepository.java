@@ -32,4 +32,8 @@ public class MemoryMemberRepository implements MemberRepository{
     public List<Member> findAll() {
         return new ArrayList<>(store.values()); //  member 는 Map 인데 반환값 List임. 걍 ㄱㄱ.
     }
+
+    public void clearStore() {
+        store.clear();
+    }
 }

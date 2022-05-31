@@ -2,9 +2,7 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemoryMemberRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.Optional;
 
@@ -13,8 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MemberServiceTest {
 
-    MemberService memberService = new MemberService();
-    MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    MemberService memberService;
+    MemoryMemberRepository memberRepository;
+
+    @BeforeEach
+    public void beforeEach() {
+        memberRepository = new MemoryMemberRepository();    // 각 테스트를 시작하기 전에 memoryMemberRepository를 만들어 이걸 memberRepository에 넣어놓고
+        memberService = new MemberService(memberRepository);    // 이러한 memberRepository를 memberService 에 잘 넣어준다. 결과적으로 같은 memoryMemberRepository가 사용됨.
+    }
 
     @AfterEach
     public void afterEach() {

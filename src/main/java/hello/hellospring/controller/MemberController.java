@@ -4,8 +4,11 @@ import hello.hellospring.domain.Member;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class MemberController {
@@ -30,5 +33,13 @@ public class MemberController {
         memberService.join(member);
 
         return "redirect:/";    // 회원가입이 끝나면 홈 화면으로 보냄.
+    }
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members); // member list 자체를 model 에 담아서 화면에 넘기려고 함.
+        return "members/memberList";
+
     }
 }
